@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SR Movies</title>
+  <style>
+    body { background: #000; color: #fff; font-family: Arial; margin: 0; }
+    header { background: #111; padding: 1rem; text-align: center; font-size: 2rem; font-weight: bold; }
+    .tabs { display: flex; justify-content: center; margin: 1rem 0; flex-wrap: wrap; }
+    .tab { margin: 0.5rem; padding: 0.5rem 1rem; background: #1a1a1a; border-radius: 5px; cursor: pointer; }
+    .tab.active { background: #333; }
+    .content { display: none; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; padding: 1rem; }
+    .content.active { display: grid; }
+    .card { background: #1a1a1a; padding: 1rem; border-radius: 8px; }
+    .poster { width: 100%; height: 320px; object-fit: cover; border-radius: 5px; }
+    .title { color: #00ffff; margin-top: 0.5rem; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+    .popup { display: none; background: #222; padding: 0.5rem; margin-top: 0.5rem; border-radius: 5px; font-size: 0.9rem; }
+    .btn { margin-top: 5px; background: #444; color: white; padding: 0.3rem 0.6rem; border: none; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <header>SR Movies</header>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('movies')">Movies</div>
+    <div class="tab" onclick="switchTab('shows')">TV Shows</div>
+    <div class="tab" onclick="switchTab('anime')">Anime</div>
+  </div>
+
+  <div id="movies" class="content active">
+    <!-- 10 Movie Cards Start -->
+    <div class="card">
+      <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/8/8e/Oppenheimer_%282023%29.jpg" />
+      <div class="title" onclick="togglePopup(this)">Oppenheimer</div>
+      <div class="popup">
+        Director: Christopher Nolan<br>
+        Release: 2023<br>
+        Summary: The story of J. Robert Oppenheimer and the atomic bomb.<br>
+        <a href="https://www.youtube.com/watch?v=uYPbbksJxIg" target="_blank">🎞 Trailer</a> |
+        <a href="https://www.peacocktv.com" target="_blank">📺 Watch</a><br>
+        <button class="btn" onclick="addToList('favorites','Oppenheimer')">⭐ Favorite</button>
+        <button class="btn" onclick="addToList('watchlist','Oppenheimer')">⏳ Watchlist</button>
+      </div>
+    </div>
+    <div class="card">
+      <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/0/03/John_Wick_Chapter_4_poster.jpg" />
+      <div class="title" onclick="togglePopup(this)">John Wick: Chapter 4</div>
+      <div class="popup">
+        Director: Chad Stahelski<br>
+        Release: 2023<br>
+        Summary: John Wick fights his way through The High Table.<br>
+        <a href="https://www.youtube.com/watch?v=qEVUtrk8_B4" target="_blank">🎞 Trailer</a> |
+        <a href="https://www.lionsgate.com/movies/john-wick-chapter-4" target="_blank">📺 Watch</a><br>
+        <button class="btn" onclick="addToList('favorites','John Wick 4')">⭐ Favorite</button>
+        <button class="btn" onclick="addToList('watchlist','John Wick 4')">⏳ Watchlist</button>
+      </div>
+    </div>
+    <div class="card">
+      <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg" />
+      <div class="title" onclick="togglePopup(this)">Spider-Man: No Way Home</div>
+      <div class="popup">
+        Director: Jon Watts<br>
+        Release: 2021<br>
+        Summary: Spider-Man seeks help from Doctor Strange to fix the multiverse.<br>
+        <a href="https://www.youtube.com/watch?v=JfVOs4VSpmA" target="_blank">🎞 Trailer</a> |
+        <a href="https://www.sonypictures.com/movies/spidermannowayhome" target="_blank">📺 Watch</a><br>
+        <button class="btn" onclick="addToList('favorites','Spider-Man: No Way Home')">⭐ Favorite</button>
+        <button class="btn" onclick="addToList('watchlist','Spider-Man: No Way Home')">⏳ Watchlist</button>
+      </div>
+    </div>
+    <div class="card">
+      <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/3/37/Avatar_The_Way_of_Water_poster.jpg" />
+      <div class="title" onclick="togglePopup(this)">Avatar: The Way of Water</div>
+      <div class="popup">
+        Director: James Cameron<br>
+        Release: 2022<br>
+        Summary: The Sully family returns to face a new threat underwater.<br>
+        <a href="https://www.youtube.com/watch?v=d9MyW72ELq0" target="_blank">🎞 Trailer</a> |
+        <a href="https://www.disneyplus.com/movies/avatar-the-way-of-water" target="_blank">📺 Watch</a><br>
+        <button class="btn" onclick="addToList('favorites','Avatar 2')">⭐ Favorite</button>
+        <button class="btn" onclick="addToList('watchlist','Avatar 2')">⏳ Watchlist</button>
+      </div>
+    </div>
+    <!-- 6 more cards in Part 1.5 (next message) -->
+    <div class="card">
+        <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/f/fb/Dune_Part_Two_poster.jpg" />
+        <div class="title" onclick="togglePopup(this)">Dune: Part Two</div>
+        <div class="popup">
+          Director: Denis Villeneuve<br>
+          Release: 2024<br>
+          Summary: Paul Atreides joins forces with the Fremen to take revenge on the House Harkonnen.<br>
+          <a href="https://www.youtube.com/watch?v=Way9Dexny3w" target="_blank">🎞 Trailer</a> |
+          <a href="https://www.hbomax.com" target="_blank">📺 Watch</a><br>
+          <button class="btn" onclick="addToList('favorites','Dune: Part Two')">⭐ Favorite</button>
+          <button class="btn" onclick="addToList('watchlist','Dune: Part Two')">⏳ Watchlist</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/a/a6/Everything_Everywhere_All_at_Once.jpg" />
+        <div class="title" onclick="togglePopup(this)">Everything Everywhere All at Once</div>
+        <div class="popup">
+          Directors: Daniels<br>
+          Release: 2022<br>
+          Summary: A woman is thrust into a multiverse where she must save existence itself.<br>
+          <a href="https://www.youtube.com/watch?v=wxN1T1uxQ2g" target="_blank">🎞 Trailer</a> |
+          <a href="https://play.google.com/store/movies/details?id=V7ICDVL2qIw.P" target="_blank">📺 Watch</a><br>
+          <button class="btn" onclick="addToList('favorites','Everything Everywhere')">⭐ Favorite</button>
+          <button class="btn" onclick="addToList('watchlist','Everything Everywhere')">⏳ Watchlist</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/2/2f/The_Batman_%282022_film%29_poster.jpg" />
+        <div class="title" onclick="togglePopup(this)">The Batman</div>
+        <div class="popup">
+          Director: Matt Reeves<br>
+          Release: 2022<br>
+          Summary: Batman uncovers corruption in Gotham while tracking the Riddler.<br>
+          <a href="https://www.youtube.com/watch?v=mqqft2x_Aa4" target="_blank">🎞 Trailer</a> |
+          <a href="https://www.hbomax.com" target="_blank">📺 Watch</a><br>
+          <button class="btn" onclick="addToList('favorites','The Batman')">⭐ Favorite</button>
+          <button class="btn" onclick="addToList('watchlist','The Batman')">⏳ Watchlist</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/5/53/Top_Gun_Maverick_Poster.jpg" />
+        <div class="title" onclick="togglePopup(this)">Top Gun: Maverick</div>
+        <div class="popup">
+          Director: Joseph Kosinski<br>
+          Release: 2022<br>
+          Summary: Pete "Maverick" Mitchell trains Top Gun graduates for a deadly mission.<br>
+          <a href="https://www.youtube.com/watch?v=qSqVVswa420" target="_blank">🎞 Trailer</a> |
+          <a href="https://www.paramountplus.com" target="_blank">📺 Watch</a><br>
+          <button class="btn" onclick="addToList('favorites','Top Gun: Maverick')">⭐ Favorite</button>
+          <button class="btn" onclick="addToList('watchlist','Top Gun: Maverick')">⏳ Watchlist</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/f/fc/Black_Panther_Wakanda_Forever_poster.jpg" />
+        <div class="title" onclick="togglePopup(this)">Black Panther: Wakanda Forever</div>
+        <div class="popup">
+          Director: Ryan Coogler<br>
+          Release: 2022<br>
+          Summary: The people of Wakanda fight to protect their nation after King T'Challa’s death.<br>
+          <a href="https://www.youtube.com/watch?v=_Z3QKkl1WyM" target="_blank">🎞 Trailer</a> |
+          <a href="https://www.disneyplus.com/movies/black-panther-wakanda-forever" target="_blank">📺 Watch</a><br>
+          <button class="btn" onclick="addToList('favorites','Black Panther: Wakanda Forever')">⭐ Favorite</button>
+          <button class="btn" onclick="addToList('watchlist','Black Panther: Wakanda Forever')">⏳ Watchlist</button>
+        </div>
+      </div>
+    </div> <!-- End of #movies -->
+    <div id="shows" class="content">
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/f/f7/Stranger_Things_season_4.jpg" />
+          <div class="title" onclick="togglePopup(this)">Stranger Things</div>
+          <div class="popup">
+            Creator: Duffer Brothers<br>
+            Release: 2022<br>
+            Summary: A group of kids in Hawkins fight supernatural forces.<br>
+            <a href="https://www.youtube.com/watch?v=yQEondeGvKo" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/80057281" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Stranger Things')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Stranger Things')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/8/8e/The_Boys_Season_3_poster.jpg" />
+          <div class="title" onclick="togglePopup(this)">The Boys</div>
+          <div class="popup">
+            Creator: Eric Kripke<br>
+            Release: 2022<br>
+            Summary: A group takes on corrupt superheroes backed by a powerful corporation.<br>
+            <a href="https://www.youtube.com/watch?v=K-8VYKUZYiw" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.primevideo.com/detail/The-Boys" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','The Boys')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','The Boys')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/b/bc/Wandinha_p%C3%B4ster.jpg" />
+          <div class="title" onclick="togglePopup(this)">Wednesday</div>
+          <div class="popup">
+            Creator: Alfred Gough, Miles Millar<br>
+            Release: 2022<br>
+            Summary: Wednesday Addams joins Nevermore Academy and investigates a monster.<br>
+            <a href="https://www.youtube.com/watch?v=Di310WS8zLk" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81231974" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Wednesday')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Wednesday')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/9/98/The_Last_of_Us_2023_TV_series.jpg" />
+          <div class="title" onclick="togglePopup(this)">The Last of Us</div>
+          <div class="popup">
+            Creator: Craig Mazin, Neil Druckmann<br>
+            Release: 2023<br>
+            Summary: A man and a girl survive in a post-apocalyptic world of infected humans.<br>
+            <a href="https://www.youtube.com/watch?v=uLtkt8BonwM" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.hbomax.com" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','The Last of Us')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','The Last of Us')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/5/52/Loki_%28TV_series%29_logo.jpg" />
+          <div class="title" onclick="togglePopup(this)">Loki</div>
+          <div class="popup">
+            Creator: Michael Waldron<br>
+            Release: 2021<br>
+            Summary: Loki alters the timeline after stealing the Tesseract.<br>
+            <a href="https://www.youtube.com/watch?v=nW948Va-l10" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.disneyplus.com/series/loki" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Loki')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Loki')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/e/e1/Squid_Game.jpg" />
+          <div class="title" onclick="togglePopup(this)">Squid Game</div>
+          <div class="popup">
+            Creator: Hwang Dong-hyuk<br>
+            Release: 2021<br>
+            Summary: People in debt play deadly games for cash in this Korean thriller.<br>
+            <a href="https://www.youtube.com/watch?v=oqxAJKy0ii4" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81040344" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Squid Game')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Squid Game')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/e/e4/House_of_the_Dragon_title_card.jpg" />
+          <div class="title" onclick="togglePopup(this)">House of the Dragon</div>
+          <div class="popup">
+            Creator: George R. R. Martin, Ryan Condal<br>
+            Release: 2022<br>
+            Summary: The Targaryen dynasty’s rise and civil war in Westeros.<br>
+            <a href="https://www.youtube.com/watch?v=DotnJ7tTA34" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.hbomax.com" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','House of the Dragon')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','House of the Dragon')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/c/c9/Peacemaker_%28TV_series%29.png" />
+          <div class="title" onclick="togglePopup(this)">Peacemaker</div>
+          <div class="popup">
+            Creator: James Gunn<br>
+            Release: 2022<br>
+            Summary: A violent vigilante tries to maintain peace at any cost.<br>
+            <a href="https://www.youtube.com/watch?v=OODneEUWUQY" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.hbomax.com" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Peacemaker')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Peacemaker')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/e/eb/All_of_Us_Are_Dead_poster.jpg" />
+          <div class="title" onclick="togglePopup(this)">All of Us Are Dead</div>
+          <div class="popup">
+            Creator: Chun Sung-il<br>
+            Release: 2022<br>
+            Summary: A zombie outbreak hits a high school in South Korea.<br>
+            <a href="https://www.youtube.com/watch?v=IN5TD4VRcSM" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81237994" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','All of Us Are Dead')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','All of Us Are Dead')">⏳ Watchlist</button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/b/bd/Severance_%28TV_series%29.png" />
+          <div class="title" onclick="togglePopup(this)">Severance</div>
+          <div class="popup">
+            Creator: Dan Erickson<br>
+            Release: 2022<br>
+            Summary: Employees at Lumon Industries undergo a mind-separating procedure.<br>
+            <a href="https://www.youtube.com/watch?v=xEQP4VVuyrY" target="_blank">🎞 Trailer</a> |
+            <a href="https://tv.apple.com/show/severance" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Severance')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Severance')">⏳ Watchlist</button>
+          </div>
+        </div>
+      </div> <!-- End of #shows -->
+      <div id="anime" class="content">
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/e/e1/Demon_Slayer_Kimetsu_no_Yaiba_Season_2.jpg" />
+          <div class="title" onclick="togglePopup(this)">Demon Slayer</div>
+          <div class="popup">
+            Studio: Ufotable<br>
+            Release: 2021<br>
+            Summary: Tanjiro joins the Demon Slayer Corps to cure his sister Nezuko.<br>
+            <a href="https://www.youtube.com/watch?v=VQGCKyvzIM4" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81091393" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Demon Slayer')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Demon Slayer')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/f/f9/Jujutsu_kaisen_volume_1_cover.jpg" />
+          <div class="title" onclick="togglePopup(this)">Jujutsu Kaisen</div>
+          <div class="popup">
+            Studio: MAPPA<br>
+            Release: 2020<br>
+            Summary: Yuji Itadori consumes a cursed object and joins Jujutsu High.<br>
+            <a href="https://www.youtube.com/watch?v=f7R3FqdXXz4" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81278456" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Jujutsu Kaisen')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Jujutsu Kaisen')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/7/70/Attack_on_Titan_Season_4.jpg" />
+          <div class="title" onclick="togglePopup(this)">Attack on Titan</div>
+          <div class="popup">
+            Studio: MAPPA<br>
+            Release: 2020–2023<br>
+            Summary: Eren Yeager declares war against the world in a battle of titans.<br>
+            <a href="https://www.youtube.com/watch?v=M_OauHnAFc8" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/80014363" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Attack on Titan')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Attack on Titan')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/1/13/Chainsaw_Man_volume_1_cover.jpg" />
+          <div class="title" onclick="togglePopup(this)">Chainsaw Man</div>
+          <div class="popup">
+            Studio: MAPPA<br>
+            Release: 2022<br>
+            Summary: Denji fuses with a devil and becomes a demon hunter with chainsaw powers.<br>
+            <a href="https://www.youtube.com/watch?v=eyonP1AgC0k" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.crunchyroll.com/series/GVDHX8QNW" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Chainsaw Man')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Chainsaw Man')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/0/0c/Vinland_Saga_volume_1_cover.jpg" />
+          <div class="title" onclick="togglePopup(this)">Vinland Saga</div>
+          <div class="popup">
+            Studio: Wit Studio / MAPPA<br>
+            Release: 2019–2023<br>
+            Summary: A young Viking warrior seeks revenge and finds redemption.<br>
+            <a href="https://www.youtube.com/watch?v=f8JrZ7Q_p-8" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81270088" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Vinland Saga')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Vinland Saga')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/1/1b/Tokyo_Revengers_volume_1_cover.jpg" />
+          <div class="title" onclick="togglePopup(this)">Tokyo Revengers</div>
+          <div class="popup">
+            Studio: LIDENFILMS<br>
+            Release: 2021<br>
+            Summary: A man travels back in time to save his girlfriend from a gang war.<br>
+            <a href="https://www.youtube.com/watch?v=R5xgJG5AI3g" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.hotstar.com/in/tv/tokyo-revengers" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Tokyo Revengers')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Tokyo Revengers')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/9/98/Spy_x_Family_volume_1.jpg" />
+          <div class="title" onclick="togglePopup(this)">Spy x Family</div>
+          <div class="popup">
+            Studio: Wit Studio / CloverWorks<br>
+            Release: 2022<br>
+            Summary: A spy, assassin, and telepath form a fake family for a secret mission.<br>
+            <a href="https://www.youtube.com/watch?v=CCXLUQecuxw" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.netflix.com/title/81410413" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Spy x Family')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Spy x Family')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/f/f0/Blue_Lock_volume_1_cover.jpg" />
+          <div class="title" onclick="togglePopup(this)">Blue Lock</div>
+          <div class="popup">
+            Studio: 8bit<br>
+            Release: 2022<br>
+            Summary: Japan builds a facility to produce the world's best striker.<br>
+            <a href="https://www.youtube.com/watch?v=08pO1WwIrrE" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.crunchyroll.com/series/GDKHZEP0G" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Blue Lock')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Blue Lock')">⏳ Watchlist</button>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/9/94/Mashle.jpg" />
+          <div class="title" onclick="togglePopup(this)">Mashle: Magic and Muscles</div>
+          <div class="popup">
+            Studio: A-1 Pictures<br>
+            Release: 2023<br>
+            Summary: In a magic world, Mash fights with pure muscle instead of spells.<br>
+            <a href="https://www.youtube.com/watch?v=7kSU5rTL0d8" target="_blank">🎞 Trailer</a> |
+            <a href="https://www.crunchyroll.com/series/GDKHZEJ0R" target="_blank">📺 Watch</a><br>
+            <button class="btn" onclick="addToList('favorites','Mashle')">⭐ Favorite</button>
+            <button class="btn" onclick="addToList('watchlist','Mashle')">⏳ Watchlist</button>
+          </div>
+        </div>
+      </div> <!-- End of Anime -->
+    
+      <!-- JavaScript Logic -->
+      <script>
+        function switchTab(id) {
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+          document.getElementById(id).classList.add('active');
+          event.target.classList.add('active');
+        }
+    
+        function togglePopup(el) {
+          const popup = el.nextElementSibling;
+          popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        }
+    
+        function addToList(type, title) {
+          let list = JSON.parse(localStorage.getItem(type)) || [];
+          if (!list.includes(title)) {
+            list.push(title);
+            localStorage.setItem(type, JSON.stringify(list));
+            alert(`${title} added to your ${type}.`);
+          } else {
+            alert(`${title} is already in your ${type}.`);
+          }
+        }
+      </script>
+    </body>
+    </html>
+    
